@@ -338,7 +338,13 @@ body{
 const SMARTLINK = "https://www.profitableratecpmnetwork.com/i22pjqip?key=3d90b365c9b4251e864b586b01809e74";
 // ==============================
 
-document.getElementById('resultCta').href = SMARTLINK;
+// PERBAIKAN: Memaksa browser melakukan redirect saat tombol diklik
+const ctaBtn = document.getElementById('resultCta');
+ctaBtn.href = SMARTLINK; // Memasang link ke atribut HTML
+ctaBtn.addEventListener('click', function(e) {
+  e.preventDefault(); // Mencegah browser macet di tautan "#"
+  window.location.href = SMARTLINK; // Paksa pindah halaman ke Adsterra
+});
 
 const answers = {};
 let curStep = 1;
