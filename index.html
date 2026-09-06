@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+<title>Find Your AI Income Method</title>
+<style>
+:root{
+  --bg:#f6f7fb;
+  --white:#ffffff;
+  --indigo:#1e1b4b;
+  --indigo-mid:#3730a3;
+  --lime:#a3e635;
+  --lime-dark:#65a30d;
+  --text:#1f2937;
+  --muted:#6b7280;
+  --border:#e5e7eb;
+  --shadow:rgba(30,27,75,.1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+/* header */
+.header{
+  background:var(--white);
+  border-bottom:1px solid var(--border);
+  padding:14px 24px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.logo{
+  font-size:17px;font-weight:800;
+  color:var(--indigo);letter-spacing:-.03em;
+}
+.logo span{color:var(--indigo-mid);}
+.secure-tag{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:5px;}
+
+/* progress */
+.progress-wrap{
+  background:var(--white);
+  border-bottom:1px solid var(--border);
+  padding:14px 24px;
+}
+.progress-label{
+  display:flex;justify-content:space-between;
+  font-size:12px;color:var(--muted);margin-bottom:8px;
+}
+.progress-bar{
+  height:5px;background:#e5e7eb;border-radius:100px;overflow:hidden;
+}
+.progress-fill{
+  height:100%;
+  background:linear-gradient(90deg,var(--indigo-mid),var(--indigo));
+  border-radius:100px;
+  transition:width .4s cubic-bezier(.4,0,.2,1);
+}
+
+/* main */
+.main{
+  flex:1;display:flex;
+  align-items:center;justify-content:center;
+  padding:32px 20px;
+}
+.card{
+  background:var(--white);
+  border-radius:16px;
+  padding:44px 40px;
+  max-width:620px;width:100%;
+  box-shadow:0 4px 32px var(--shadow),0 1px 3px rgba(0,0,0,.05);
+  position:relative;overflow:hidden;
+}
+.card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--indigo-mid),var(--indigo));
+}
+
+/* Question panel */
+.panel{display:none;}
+.panel.active{display:block;}
+
+.q-step{
+  font-size:12px;color:var(--indigo-mid);
+  font-weight:600;letter-spacing:.04em;margin-bottom:12px;
+}
+.q-title{
+  font-size:clamp(20px,4.5vw,26px);
+  font-weight:700;color:var(--indigo);
+  line-height:1.25;margin-bottom:8px;
+}
+.q-sub{font-size:14px;color:var(--muted);margin-bottom:28px;line-height:1.5;}
+
+/* Options */
+.options{display:flex;flex-direction:column;gap:12px;}
+.opt{
+  display:flex;align-items:center;gap:14px;
+  padding:16px 18px;border:2px solid var(--border);
+  border-radius:10px;cursor:pointer;
+  background:var(--white);text-align:left;width:100%;
+  transition:border-color .15s,background .15s,transform .12s;
+}
+.opt:hover{border-color:var(--indigo-mid);background:#f5f3ff;transform:translateX(2px);}
+.opt.selected{border-color:var(--indigo);background:#ede9fe;}
+.opt-icon{font-size:24px;flex-shrink:0;}
+.opt-text{flex:1;}
+.opt-label{font-size:15px;font-weight:600;color:var(--text);display:block;}
+.opt-desc{font-size:13px;color:var(--muted);margin-top:2px;}
+
+/* nav */
+.nav{display:flex;gap:12px;margin-top:28px;justify-content:flex-end;}
+.btn-back{
+  padding:13px 24px;border-radius:8px;font-size:14px;font-weight:600;
+  border:2px solid var(--border);background:none;color:var(--muted);cursor:pointer;
+  transition:border-color .12s,color .12s;
+}
+.btn-back:hover{border-color:var(--indigo-mid);color:var(--indigo);}
+.btn-next{
+  padding:13px 28px;border-radius:8px;font-size:15px;font-weight:700;
+  background:var(--indigo);color:var(--white);border:none;cursor:pointer;
+  transition:background .12s,transform .12s;
+  opacity:.4;pointer-events:none;
+}
+.btn-next.ready{opacity:1;pointer-events:auto;}
+.btn-next.ready:hover{background:var(--indigo-mid);transform:translateX(2px);}
+
+/* Result panel */
+#result{text-align:center;}
+.result-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:linear-gradient(135deg,#dcfce7,#d1fae5);
+  border:1.5px solid #6ee7b7;border-radius:100px;
+  padding:6px 18px;font-size:13px;font-weight:600;color:#059669;
+  margin-bottom:24px;
+}
+.result-title{
+  font-size:clamp(22px,5vw,32px);font-weight:800;
+  color:var(--indigo);margin-bottom:12px;
+}
+.result-sub{font-size:15px;color:var(--muted);max-width:440px;margin:0 auto 28px;line-height:1.6;}
+
+.match-card{
+  background:linear-gradient(135deg,var(--indigo),#312e81);
+  border-radius:14px;padding:28px 24px;margin-bottom:28px;text-align:left;
+  position:relative;overflow:hidden;
+}
+.match-card::after{
+  content:'';position:absolute;top:-40px;right:-40px;
+  width:150px;height:150px;
+  background:rgba(255,255,255,.05);border-radius:50%;
+}
+.match-label{font-size:11px;color:rgba(255,255,255,.5);letter-spacing:.05em;margin-bottom:6px;}
+.match-name{font-size:20px;font-weight:700;color:#fff;margin-bottom:6px;}
+.match-desc{font-size:13px;color:rgba(255,255,255,.65);line-height:1.5;}
+.match-tag{
+  display:inline-block;margin-top:12px;
+  background:var(--lime);color:#1a2e00;
+  font-size:12px;font-weight:700;
+  padding:4px 12px;border-radius:100px;
+}
+
+.cta-result{
+  display:block;width:100%;max-width:380px;margin:0 auto;
+  padding:17px;border-radius:10px;font-size:17px;font-weight:700;
+  background:linear-gradient(130deg,var(--indigo-mid),var(--indigo));
+  color:#fff;text-decoration:none;text-align:center;
+  box-shadow:0 8px 24px rgba(55,48,163,.35);
+  transition:transform .13s,box-shadow .13s;
+}
+.cta-result:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(55,48,163,.45);}
+.result-note{font-size:12px;color:var(--muted);margin-top:14px;}
+.stars{color:#fbbf24;font-size:15px;letter-spacing:2px;margin-bottom:4px;}
+
+/* footer */
+.footer{
+  text-align:center;padding:18px;
+  font-size:12px;color:var(--muted);
+  border-top:1px solid var(--border);
+}
+.footer a{color:var(--muted);text-decoration:underline;margin:0 6px;}
+
+@media(max-width:520px){
+  .card{padding:28px 18px;}
+  .opt{padding:14px 14px;}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">Income<span>Match</span> AI</div>
+  <div class="secure-tag">🔒 Secure &amp; Free</div>
+</div>
+
+<div class="progress-wrap">
+  <div class="progress-label">
+    <span id="stepLabel">Step 1 of 3</span>
+    <span id="pctLabel">33%</span>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="pfill" style="width:33%"></div></div>
+</div>
+
+<div class="main">
+  <div class="card">
+
+    <!-- Q1 -->
+    <div class="panel active" id="q1">
+      <div class="q-step">Question 1 of 3</div>
+      <div class="q-title">What is your main financial goal right now?</div>
+      <div class="q-sub">Choose the one that best describes what you're aiming for.</div>
+      <div class="options" id="opts1">
+        <button class="opt" data-q="1" data-v="extra">
+          <span class="opt-icon">💰</span>
+          <span class="opt-text">
+            <span class="opt-label">Extra Income on the Side</span>
+            <span class="opt-desc">Supplement my current salary with an additional stream</span>
+          </span>
+        </button>
+        <button class="opt" data-q="1" data-v="passive">
+          <span class="opt-icon">📈</span>
+          <span class="opt-text">
+            <span class="opt-label">Build Passive Income</span>
+            <span class="opt-desc">Earn money while I sleep without active effort</span>
+          </span>
+        </button>
+        <button class="opt" data-q="1" data-v="freedom">
+          <span class="opt-icon">🌍</span>
+          <span class="opt-text">
+            <span class="opt-label">Full Financial Freedom</span>
+            <span class="opt-desc">Quit my 9-5 and work entirely on my own terms</span>
+          </span>
+        </button>
+      </div>
+      <div class="nav">
+        <button class="btn-next" id="next1">Next →</button>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="panel" id="q2">
+      <div class="q-step">Question 2 of 3</div>
+      <div class="q-title">How much time can you invest daily?</div>
+      <div class="q-sub">Be honest — this helps us recommend the right method for your lifestyle.</div>
+      <div class="options" id="opts2">
+        <button class="opt" data-q="2" data-v="low">
+          <span class="opt-icon">⚡</span>
+          <span class="opt-text">
+            <span class="opt-label">Less than 1 hour</span>
+            <span class="opt-desc">I'm busy — need something that fits into my existing schedule</span>
+          </span>
+        </button>
+        <button class="opt" data-q="2" data-v="mid">
+          <span class="opt-icon">⏱</span>
+          <span class="opt-text">
+            <span class="opt-label">1 to 3 hours</span>
+            <span class="opt-desc">I can dedicate a focused block of time each day</span>
+          </span>
+        </button>
+        <button class="opt" data-q="2" data-v="high">
+          <span class="opt-icon">🚀</span>
+          <span class="opt-text">
+            <span class="opt-label">3+ hours / Full-time</span>
+            <span class="opt-desc">I'm fully committed to making this work fast</span>
+          </span>
+        </button>
+      </div>
+      <div class="nav">
+        <button class="btn-back" id="back2">← Back</button>
+        <button class="btn-next" id="next2">Next →</button>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="panel" id="q3">
+      <div class="q-step">Question 3 of 3</div>
+      <div class="q-title">Where does your strength lie?</div>
+      <div class="q-sub">Everyone has a different edge. Knowing yours helps us find your perfect match.</div>
+      <div class="options" id="opts3">
+        <button class="opt" data-q="3" data-v="tech">
+          <span class="opt-icon">🤖</span>
+          <span class="opt-text">
+            <span class="opt-label">Tech & Digital Tools</span>
+            <span class="opt-desc">Comfortable with apps, platforms, and online systems</span>
+          </span>
+        </button>
+        <button class="opt" data-q="3" data-v="creative">
+          <span class="opt-icon">✏</span>
+          <span class="opt-text">
+            <span class="opt-label">Creative & Content</span>
+            <span class="opt-desc">I enjoy writing, designing, or creating engaging content</span>
+          </span>
+        </button>
+        <button class="opt" data-q="3" data-v="simple">
+          <span class="opt-icon">📋</span>
+          <span class="opt-text">
+            <span class="opt-label">Simple Step-by-Step Tasks</span>
+            <span class="opt-desc">I prefer following clear instructions with proven results</span>
+          </span>
+        </button>
+      </div>
+      <div class="nav">
+        <button class="btn-back" id="back3">← Back</button>
+        <button class="btn-next" id="next3">See My Match →</button>
+      </div>
+    </div>
+
+    <!-- Result -->
+    <div class="panel" id="result">
+      <div class="result-badge">✅ Perfect Match Found!</div>
+      <div class="q-title result-title">Your AI Income Method is Ready</div>
+      <div class="result-sub">Based on your answers, we've identified the highest-converting opportunity for your profile.</div>
+      <div class="match-card">
+        <div class="match-label">RECOMMENDED FOR YOU</div>
+        <div class="match-name" id="matchName">AI-Powered Digital Rewards</div>
+        <div class="match-desc" id="matchDesc">A simple, beginner-friendly method used by over 200,000 people worldwide to generate consistent daily income using AI tools — no experience required.</div>
+        <div class="match-tag" id="matchTag">⭐ Top Rated 2026</div>
+      </div>
+      <div class="stars">★★★★★</div>
+      <p class="result-note" style="margin-bottom:18px">Rated 4.9/5 by 12,400+ users globally</p>
+      <a href="#" id="resultCta" class="cta-result">Claim Free Access Now</a>
+      <p class="result-note">No credit card required &nbsp;·&nbsp; Instant access &nbsp;·&nbsp; Available worldwide</p>
+    </div>
+
+  </div>
+</div>
+
+<div class="footer">
+  <a href="#">Privacy Policy</a>|<a href="#">Terms of Service</a>|<a href="#">Legal</a>
+</div>
+
+<script>
+// ===== GANTI LINK DI SINI =====
+const SMARTLINK = "https://YOUR-SMARTLINK.com/xxxxx";
+// ==============================
+
+document.getElementById('resultCta').href = SMARTLINK;
+
+const answers = {};
+let curStep = 1;
+
+// Option click
+document.querySelectorAll('.opt').forEach(btn=>{
+  btn.addEventListener('click', function(){
+    const q = this.dataset.q;
+    document.querySelectorAll(`.opt[data-q="${q}"]`).forEach(b=>b.classList.remove('selected'));
+    this.classList.add('selected');
+    answers[q] = this.dataset.v;
+    document.getElementById('next'+q).classList.add('ready');
+  });
+});
+
+function goTo(step){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  const id = step === 'result' ? 'result' : 'q'+step;
+  document.getElementById(id).classList.add('active');
+  curStep = step;
+  updateProgress(step);
+}
+
+function updateProgress(step){
+  const map = {1:33,2:66,3:99,'result':100};
+  const pct = map[step]||33;
+  document.getElementById('pfill').style.width = pct+'%';
+  document.getElementById('pctLabel').textContent = pct+'%';
+  document.getElementById('stepLabel').textContent =
+    step==='result' ? 'Complete!' : `Step ${step} of 3`;
+}
+
+document.getElementById('next1').addEventListener('click',()=>goTo(2));
+document.getElementById('back2').addEventListener('click',()=>goTo(1));
+document.getElementById('next2').addEventListener('click',()=>goTo(3));
+document.getElementById('back3').addEventListener('click',()=>goTo(2));
+document.getElementById('next3').addEventListener('click',()=>{
+  showResult();
+  goTo('result');
+});
+
+const matchData = {
+  tech:  {name:"AI Automation Income",   desc:"Use cutting-edge AI tools to automate digital tasks, generate content, and monetize online traffic — the fastest-growing method in 2026.", tag:"🤖 AI-Powered"},
+  creative: {name:"Digital Content Monetization", desc:"Turn your creative skills into a consistent income stream with AI-assisted content platforms paying creators globally.", tag:"✏ Creator Economy"},
+  simple:{name:"Guided Digital Rewards Program", desc:"A step-by-step system trusted by beginners worldwide — follow the proven blueprint and start earning within hours.", tag:"📋 Beginner-Friendly"},
+};
+
+function showResult(){
+  const strength = answers['3'] || 'simple';
+  const d = matchData[strength];
+  document.getElementById('matchName').textContent = d.name;
+  document.getElementById('matchDesc').textContent = d.desc;
+  document.getElementById('matchTag').textContent  = d.tag;
+}
+</script>
+</body>
+</html>
