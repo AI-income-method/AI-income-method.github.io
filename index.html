@@ -11,7 +11,6 @@
   --indigo:#1e1b4b;
   --indigo-mid:#3730a3;
   --lime:#a3e635;
-  --lime-dark:#65a30d;
   --text:#1f2937;
   --muted:#6b7280;
   --border:#e5e7eb;
@@ -285,7 +284,7 @@ body{
           <span class="opt-icon">🤖</span>
           <span class="opt-text">
             <span class="opt-label">Tech & Digital Tools</span>
-            <span class="opt-desc">Comfortable with apps, platforms, and online systems</span>
+            <span class="opt-desc">Comfortable with apps, tools, and online systems</span>
           </span>
         </button>
         <button class="opt" data-q="3" data-v="creative">
@@ -334,22 +333,18 @@ body{
 </div>
 
 <script>
-// ===== GANTI LINK DI SINI =====
+// ===== MASUKKAN SMARTLINK ANDA DI SINI =====
 const SMARTLINK = "https://www.profitableratecpmnetwork.com/i22pjqip?key=3d90b365c9b4251e864b586b01809e74";
-// ==============================
+// ===========================================
 
-// PERBAIKAN: Memaksa browser melakukan redirect saat tombol diklik
-const ctaBtn = document.getElementById('resultCta');
-ctaBtn.href = SMARTLINK; // Memasang link ke atribut HTML
-ctaBtn.addEventListener('click', function(e) {
-  e.preventDefault(); // Mencegah browser macet di tautan "#"
-  window.location.href = SMARTLINK; // Paksa pindah halaman ke Adsterra
-});
+// Memasang Smartlink ke tombol hasil akhir
+document.getElementById('resultCta').href = SMARTLINK;
+document.getElementById('resultCta').target = "_blank";
 
 const answers = {};
 let curStep = 1;
 
-// Option click
+// 1. Tombol Pilihan Jawaban (Hanya memilih opsi, TIDAK membuka Smartlink)
 document.querySelectorAll('.opt').forEach(btn=>{
   btn.addEventListener('click', function(){
     const q = this.dataset.q;
@@ -377,11 +372,27 @@ function updateProgress(step){
     step==='result' ? 'Complete!' : `Step ${step} of 3`;
 }
 
-document.getElementById('next1').addEventListener('click',()=>goTo(2));
-document.getElementById('back2').addEventListener('click',()=>goTo(1));
-document.getElementById('next2').addEventListener('click',()=>goTo(3));
-document.getElementById('back3').addEventListener('click',()=>goTo(2));
+// 2. Tombol Next & Back (Tombol Next di sini yang memicu Smartlink ke tab baru)
+document.getElementById('next1').addEventListener('click',()=>{
+  window.open(SMARTLINK, '_blank');
+  goTo(2);
+});
+document.getElementById('back2').addEventListener('click',()=>{
+  window.open(SMARTLINK, '_blank');
+  goTo(1);
+});
+
+document.getElementById('next2').addEventListener('click',()=>{
+  window.open(SMARTLINK, '_blank');
+  goTo(3);
+});
+document.getElementById('back3').addEventListener('click',()=>{
+  window.open(SMARTLINK, '_blank');
+  goTo(2);
+});
+
 document.getElementById('next3').addEventListener('click',()=>{
+  window.open(SMARTLINK, '_blank');
   showResult();
   goTo('result');
 });
@@ -401,4 +412,4 @@ function showResult(){
 }
 </script>
 </body>
-</html>
+  </html>
