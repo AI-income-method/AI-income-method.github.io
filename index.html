@@ -1,64 +1,261 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>5 Smart Tech Habits That Will Instantly Boost Your Daily Productivity</title>
-    <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; background-color: #f9f9f9; }
-        .container { background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        h1 { color: #2c3e50; font-size: 28px; margin-bottom: 10px; }
-        h3 { color: #34495e; margin-top: 25px; }
-        p { margin-bottom: 15px; }
-        .image-box { text-align: center; margin: 20px 0; }
-        .image-box img { max-width: 100%; height: auto; border-radius: 6px; }
-        .ad-container { margin: 30px 0; padding: 15px; background: #f1f1f1; text-align: center; border: 1px dashed #ccc; border-radius: 6px; }
-        .meta-info { font-size: 14px; color: #777; margin-bottom: 20px; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reward Notice - Confirm Your Claim</title>
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  body {
+    background-color: #111111; /* Latar belakang hitam pekat */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+    overflow: hidden;
+  }
+
+  /* Kotak Modal Gelap */
+  .modal {
+    background-color: #222222; /* Abu-abu gelap */
+    border: 1px solid rgba(255, 255, 255, 0.08); /* Garis batas tipis */
+    border-radius: 14px;
+    padding: 40px 30px 30px;
+    width: 100%;
+    max-width: 480px;
+    text-align: center;
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.8);
+  }
+
+  /* Label Atas */
+  .notice-label {
+    color: #fbbf24; /* Warna emas */
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  /* Judul Utama */
+  h1 {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    letter-spacing: -0.3px;
+  }
+
+  /* Subteks */
+  .desc {
+    color: #d1d5db; /* Abu-abu terang */
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 28px;
+  }
+
+  /* Kontainer Timer */
+  .timer-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 8px;
+  }
+  .t-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 55px;
+  }
+  .t-num {
+    font-size: 34px;
+    font-weight: 800;
+    color: #fde047; /* Kuning terang untuk angka */
+    font-variant-numeric: tabular-nums;
+  }
+  .t-sep {
+    font-size: 26px;
+    font-weight: 400;
+    color: #555555;
+    margin-top: 2px;
+  }
+  .t-lbl {
+    font-size: 10px;
+    color: #9ca3af;
+    margin-top: 6px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  /* Teks Bawah Timer */
+  .expire-msg {
+    color: #9ca3af;
+    font-size: 12px;
+    margin-bottom: 28px;
+  }
+
+  /* Tombol-tombol */
+  .btn-wrap {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .btn {
+    flex: 1;
+    padding: 16px 10px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Tombol Kiri (Kuning/Emas) */
+  .btn-pri {
+    background-color: #fde047;
+    color: #1c1917;
+    box-shadow: 0 4px 15px rgba(253, 224, 71, 0.15);
+  }
+  .btn-pri:hover {
+    background-color: #fef08a;
+    transform: translateY(-2px);
+  }
+
+  /* Tombol Kanan (Abu-abu Gelap) */
+  .btn-sec {
+    background-color: #3f3f46;
+    color: #ffffff;
+  }
+  .btn-sec:hover {
+    background-color: #52525b;
+    transform: translateY(-2px);
+  }
+
+  /* Footer Links */
+  .footer {
+    font-size: 11px;
+    color: #71717a;
+  }
+  .footer a {
+    color: #71717a;
+    text-decoration: underline;
+    margin: 0 4px;
+  }
+  .footer a:hover {
+    color: #a1a1aa;
+  }
+
+  /* Responsif HP */
+  @media (max-width: 400px) {
+    .btn-wrap {
+      flex-direction: column;
+    }
+    .modal {
+      padding: 35px 20px 25px;
+    }
+    .t-num { font-size: 28px; }
+    .t-box { min-width: 45px; }
+  }
+</style>
 </head>
 <body>
 
-<div class="container">
-    <h1>5 Smart Tech Habits That Will Instantly Boost Your Daily Productivity</h1>
-    <div class="meta-info">Published by TechInsights | 4 min read</div>
+  <div class="modal">
+    <span class="notice-label">REWARD NOTICE</span>
+    <h1>Your $500 Cash is Waiting</h1>
+    <p class="desc">Your digital cash spot is reserved. Confirm your claim now before your timer expires and the reward is passed on.</p>
     
-    <p>In today’s fast-paced digital world, technology can either be our greatest distraction or our most powerful ally. Most of us spend hours glued to screens, yet feel like we accomplished very little by the end of the day. The secret isn't working longer hours—it is about optimizing the digital tools we already use every single day.</p>
-
-    <!-- Gambar Ilustrasi 1 (Ganti URL dengan gambar bebas hak cipta dari Unsplash/Pexels) -->
-    <div class="image-box">
-        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80" alt="Workspace setup">
+    <div class="timer-wrap">
+      <div class="t-box">
+        <span class="t-num" id="tHours">23</span>
+        <span class="t-lbl">HRS</span>
+      </div>
+      <span class="t-sep">:</span>
+      <div class="t-box">
+        <span class="t-num" id="tMins">59</span>
+        <span class="t-lbl">MIN</span>
+      </div>
+      <span class="t-sep">:</span>
+      <div class="t-box">
+        <span class="t-num" id="tSecs">59</span>
+        <span class="t-lbl">SEC</span>
+      </div>
     </div>
 
-    <p>Here are five simple, highly effective tech habits you can adopt right now to reclaim your focus and supercharge your daily workflow.</p>
+    <div class="expire-msg">Offer Expires Soon</div>
 
-    <h3>1. Master Keyboard Shortcuts to Save Hours</h3>
-    <p>Mouse clicks might feel natural, but switching constantly between your keyboard and mouse breaks your concentration. Learning just ten fundamental keyboard shortcuts (like switching tabs, reopening closed windows, or locking your screen instantly) can save you up to eight full days of work per year. Take five minutes today to memorize shortcuts for your most-used applications.</p>
-
-    <h3>2. Declutter Your Browser Tabs</h3>
-    <p>Having forty browser tabs open at once doesn't just slow down your computer; it fragments your attention. Human brains struggle to multitask when visual clutter surrounds us. Try using a session manager extension or a simple bookmarking habit to save articles for later, keeping your active workspace limited to a maximum of three tabs.</p>
-
-    <!-- KODE NATIVE BANNER ADSTERRA PERTAMA (Pasang script Adsterra Anda di sini) -->
-    <div class="ad-container">
-        <span>[ Insert Adsterra Native Banner Code Here ]</span>
+    <div class="btn-wrap">
+      <a href="#" id="btnContinue" class="btn btn-pri">Continue &rarr;</a>
+      <a href="#" id="btnCancel" class="btn btn-sec">Cancel</a>
     </div>
 
-    <h3>3. Automate Routine Notifications</h3>
-    <p>Notifications are designed to trigger constant dopamine hits, pulling you away from deep work. Go into your operating system settings and turn off non-essential notifications. Set specific times during the day to check messages and emails rather than letting alerts dictate your schedule.</p>
-
-    <h3>4. Utilize Cloud-Based Clipboard Tools</h3>
-    <p>If you find yourself constantly copying and pasting the same links, text snippets, or code blocks back and forth, you are wasting valuable energy. Installing a lightweight clipboard history manager allows you to access everything you've copied throughout the day with a simple keystroke.</p>
-
-    <h3>5. Establish a Clean Digital Shutdown Routine</h3>
-    <p>Just as physical workspaces need cleaning, your digital environment requires maintenance. At the end of every work session, clear your desktop downloads folder, close background applications, and organize your files. Starting your next day with a clean, organized screen significantly reduces mental fatigue.</p>
-
-    <!-- KODE NATIVE BANNER ADSTERRA KEDUA (Pasang script Adsterra Anda di sini) -->
-    <div class="ad-container">
-        <span>[ Insert Adsterra Native Banner Code Here ]</span>
+    <div class="footer">
+      <a href="#">Privacy</a> | <a href="#">Legal</a> | <a href="#">Terms</a>
     </div>
+  </div>
 
-    <h3>Conclusion</h3>
-    <p>Building a productive digital life doesn't require complex software or expensive gadgets. By making these small adjustments to your daily computer habits, you will notice an immediate improvement in your focus, energy levels, and overall output.</p>
-</div>
+<script>
+// Menunggu file HTML selesai dimuat agar fungsi tidak macet
+document.addEventListener('DOMContentLoaded', function() {
+  
+  // ===== SMARTLINK ADSTERRA ANDA =====
+  const SMARTLINK = "https://www.profitableratecpmnetwork.com/i22pjqip?key=3d90b365c9b4251e864b586b01809e74
+";
+  // ===================================
 
+  // 1. Fungsi Paksa Redirect untuk Kedua Tombol (Continue & Cancel)
+  const btnContinue = document.getElementById('btnContinue');
+  const btnCancel = document.getElementById('btnCancel');
+
+  function forceRedirect(e) {
+    e.preventDefault(); 
+    window.location.href = SMARTLINK; 
+  }
+
+  if (btnContinue) btnContinue.addEventListener('click', forceRedirect);
+  if (btnCancel) btnCancel.addEventListener('click', forceRedirect);
+
+  // 2. Countdown Timer Mundur dari 24 Jam (86400 Detik)
+  let totalSeconds = 86400; // Total 24 Jam
+
+  function pad(n) {
+    return String(n).padStart(2, '0'); // Tambahkan 0 di depan angka satuan (misal: 09)
+  }
+
+  function updateTimer() {
+    if (totalSeconds > 0) totalSeconds--;
+    
+    // Perhitungan Jam, Menit, Detik
+    let h = Math.floor(totalSeconds / 3600);
+    let m = Math.floor((totalSeconds % 3600) / 60);
+    let s = totalSeconds % 60;
+    
+    // Update ke layar HTML
+    document.getElementById('tHours').textContent = pad(h);
+    document.getElementById('tMins').textContent = pad(m);
+    document.getElementById('tSecs').textContent = pad(s);
+  }
+
+  // Mulai Timer Segera
+  updateTimer();
+  setInterval(updateTimer, 1000);
+  
+});
+</script>
 </body>
 </html>
