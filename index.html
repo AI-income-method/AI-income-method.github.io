@@ -13,7 +13,7 @@
   }
 
   body {
-    background-color: #111111; /* Latar belakang hitam pekat */
+    background-color: #111111;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -23,10 +23,9 @@
     overflow: hidden;
   }
 
-  /* Kotak Modal Gelap */
   .modal {
-    background-color: #222222; /* Abu-abu gelap */
-    border: 1px solid rgba(255, 255, 255, 0.08); /* Garis batas tipis */
+    background-color: #222222;
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 14px;
     padding: 40px 30px 30px;
     width: 100%;
@@ -35,9 +34,8 @@
     box-shadow: 0 10px 50px rgba(0, 0, 0, 0.8);
   }
 
-  /* Label Atas */
   .notice-label {
-    color: #fbbf24; /* Warna emas */
+    color: #fbbf24;
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 2px;
@@ -46,7 +44,6 @@
     display: block;
   }
 
-  /* Judul Utama */
   h1 {
     color: #ffffff;
     font-size: 24px;
@@ -55,15 +52,13 @@
     letter-spacing: -0.3px;
   }
 
-  /* Subteks */
   .desc {
-    color: #d1d5db; /* Abu-abu terang */
+    color: #d1d5db;
     font-size: 14px;
     line-height: 1.5;
     margin-bottom: 28px;
   }
 
-  /* Kontainer Timer */
   .timer-wrap {
     display: flex;
     justify-content: center;
@@ -80,7 +75,7 @@
   .t-num {
     font-size: 34px;
     font-weight: 800;
-    color: #fde047; /* Kuning terang untuk angka */
+    color: #fde047;
     font-variant-numeric: tabular-nums;
   }
   .t-sep {
@@ -97,14 +92,12 @@
     letter-spacing: 0.5px;
   }
 
-  /* Teks Bawah Timer */
   .expire-msg {
     color: #9ca3af;
     font-size: 12px;
     margin-bottom: 28px;
   }
 
-  /* Tombol-tombol */
   .btn-wrap {
     display: flex;
     gap: 12px;
@@ -125,7 +118,6 @@
     justify-content: center;
   }
   
-  /* Tombol Kiri (Kuning/Emas) */
   .btn-pri {
     background-color: #fde047;
     color: #1c1917;
@@ -136,7 +128,6 @@
     transform: translateY(-2px);
   }
 
-  /* Tombol Kanan (Abu-abu Gelap) */
   .btn-sec {
     background-color: #3f3f46;
     color: #ffffff;
@@ -146,7 +137,6 @@
     transform: translateY(-2px);
   }
 
-  /* Footer Links */
   .footer {
     font-size: 11px;
     color: #71717a;
@@ -160,7 +150,6 @@
     color: #a1a1aa;
   }
 
-  /* Responsif HP */
   @media (max-width: 400px) {
     .btn-wrap {
       flex-direction: column;
@@ -210,15 +199,11 @@
   </div>
 
 <script>
-// Menunggu file HTML selesai dimuat agar fungsi tidak macet
 document.addEventListener('DOMContentLoaded', function() {
   
-  // ===== SMARTLINK ADSTERRA ANDA =====
-  const SMARTLINK = "https://www.profitableratecpmnetwork.com/i22pjqip?key=3d90b365c9b4251e864b586b01809e74
-";
-  // ===================================
-
-  // 1. Fungsi Paksa Redirect untuk Kedua Tombol (Continue & Cancel)
+  // URL Smartlink sudah diperbaiki menjadi satu baris lurus tanpa terpotong
+  const SMARTLINK = "https://www.profitableratecpmnetwork.com/i22pjqip?key=3d90b365c9b4251e864b586b01809e74";
+  
   const btnContinue = document.getElementById('btnContinue');
   const btnCancel = document.getElementById('btnCancel');
 
@@ -230,28 +215,24 @@ document.addEventListener('DOMContentLoaded', function() {
   if (btnContinue) btnContinue.addEventListener('click', forceRedirect);
   if (btnCancel) btnCancel.addEventListener('click', forceRedirect);
 
-  // 2. Countdown Timer Mundur dari 24 Jam (86400 Detik)
-  let totalSeconds = 86400; // Total 24 Jam
+  let totalSeconds = 86400;
 
   function pad(n) {
-    return String(n).padStart(2, '0'); // Tambahkan 0 di depan angka satuan (misal: 09)
+    return String(n).padStart(2, '0');
   }
 
   function updateTimer() {
     if (totalSeconds > 0) totalSeconds--;
     
-    // Perhitungan Jam, Menit, Detik
     let h = Math.floor(totalSeconds / 3600);
     let m = Math.floor((totalSeconds % 3600) / 60);
     let s = totalSeconds % 60;
     
-    // Update ke layar HTML
     document.getElementById('tHours').textContent = pad(h);
     document.getElementById('tMins').textContent = pad(m);
     document.getElementById('tSecs').textContent = pad(s);
   }
 
-  // Mulai Timer Segera
   updateTimer();
   setInterval(updateTimer, 1000);
   
